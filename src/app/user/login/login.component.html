@@ -1,0 +1,26 @@
+<div class="mb-4 h2 text-success">
+    Sign In
+</div>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="text-danger">
+        Please enter a valid email.
+    </div>
+    <div class="mb-3">
+        <input class="form-control bg-body-secondary" formControlName="email" placeholder="Email">
+    </div>
+    <div *ngIf="form.get('password')?.invalid && form.get('password')?.touched" class="text-danger">
+        Please enter a password.
+    </div>
+    <div class="mb-3">
+        <input type="password" class="form-control bg-body-secondary" formControlName="password" placeholder="Password">
+    </div>
+    <div>
+        <a href="/">Forgot Password?</a>
+    </div>
+    <div class="mt-4">
+        <button type="submit" class="btn btn-success w-100" [disabled]="form.invalid">Sign In</button>
+    </div>
+</form>
+<div class="text-center mt-3">
+    <p>Don't have an account ? <a href="/register">Sing Up</a></p>
+</div>
