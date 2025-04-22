@@ -2,15 +2,31 @@
     Sign Up
 </div>
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div *ngIf="form.get('fullName')?.invalid && form.get('fullName')?.touched" class="text-danger">
+        Please enter a full name.
+    </div>
     <div class="mb-3">
         <input class="form-control bg-body-secondary" formControlName="fullName" placeholder="Full Name">
+    </div>
+    <div *ngIf="form.get('email')?.invalid && form.get('email')?.touched" class="text-danger">
+        Please enter a valid email.
     </div>
     <div class="mb-3">
         <input class="form-control bg-body-secondary" formControlName="email" placeholder="Email">
     </div>
+    <div *ngIf="form.get('password')?.errors?.passwordStrength && form.get('password')?.touched" class="text-danger small">
+        <div *ngIf="!form.get('password')?.errors?.passwordStrength?.hasUpperCase">Must include an uppercase letter</div>
+        <div *ngIf="!form.get('password')?.errors?.passwordStrength?.hasLowerCase">Must include a lowercase letter</div>
+        <div *ngIf="!form.get('password')?.errors?.passwordStrength?.hasNumber">Must include a number</div>
+        <div *ngIf="!form.get('password')?.errors?.passwordStrength?.hasSpecialChar">Must include a special character</div>
+        <div *ngIf="!form.get('password')?.errors?.passwordStrength?.isValidLength">Minimum 8 characters required</div>
+    </div>     
     <div class="mb-3">
         <input type="password" class="form-control bg-body-secondary" formControlName="password" placeholder="Password">
     </div>
+    <div *ngIf="form.errors?.passwordsDontMatch && form.get('confirmPassword')?.touched" class="text-danger">
+        Passwords do not match.
+    </div>      
     <div class="mb-3">
         <input type="password" class="form-control bg-body-secondary" formControlName="confirmPassword" placeholder="Confirm Password">
     </div>
